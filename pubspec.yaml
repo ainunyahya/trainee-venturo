@@ -38,6 +38,10 @@ dependencies:
   get: ^4.6.5
   flutter_screenutil: ^5.7.0
   google_fonts: ^6.2.1
+  firebase_core: ^2.24.2
+  firebase_auth: ^4.16.0
+  cloud_firestore: ^4.14.0
+  firebase_analytics: ^10.8.0
 
 dev_dependencies:
   flutter_test:
