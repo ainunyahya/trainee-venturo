@@ -16,7 +16,7 @@ class SplashScreen extends StatelessWidget {
     Future.delayed(const Duration(seconds: 3), () async {
       await GlobalController.to.checkConnection();
       if (GlobalController.to.isConnect.value) {
-        Get.offNamed(MainRoute.counter); // Navigate to CounterView if connected
+        Get.offNamed(MainRoute.signIn); // Navigate to CounterView if connected
       } else {
         Get.offNamed(MainRoute.noConnection); // Navigate to NoConnectionView if not connected
       }

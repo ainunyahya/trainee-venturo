@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:get/get.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
+import 'package:trainee/constants/cores/api/api_constant.dart';
 import 'package:trainee/modules/loggers/logger.dart';
 
 class GlobalController extends GetxController {
@@ -8,6 +9,10 @@ class GlobalController extends GetxController {
 
   /// Check Connection Variable
   var isConnect = false.obs;
+
+  /// Api
+  var baseUrl = ApiConstant.production;
+  var isStaging = false.obs;
 
   @override
   void onInit() {
