@@ -5,8 +5,10 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 import 'package:trainee/modules/features/forgot_password/controllers/forgot_password_controller.dart';
 
+import '../../../../../configs/routes/main_route.dart';
 import '../../../../../configs/themes/main_color.dart';
 import '../../../../../constants/cores/assets/image_constant.dart';
 import '../../../../../shared/customs/text_form_field_custom.dart';
@@ -96,7 +98,9 @@ class ForgotPasswordView extends StatelessWidget {
               SizedBox(height: 40.h),
               ElevatedButton(
                 style: EvelatedButtonStyle.mainRounded,
-                onPressed: () {},
+                onPressed: () {
+                  Get.offAllNamed(MainRoute.otpPassword);
+                },
                 child: Text(
                   "Ubah Password",
                   style: GoogleTextStyle.fw800.copyWith(

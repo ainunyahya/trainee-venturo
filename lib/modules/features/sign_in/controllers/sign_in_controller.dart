@@ -47,7 +47,7 @@ class SignInController extends GetxController {
       formKey.currentState!.save();
       if (emailCtrl.text == "admin@gmail.com" && passwordCtrl.text == "admin") {
         EasyLoading.dismiss();
-        Get.offAllNamed(MainRoute.initial);
+        Get.offAllNamed(MainRoute.list);
       } else {
         EasyLoading.dismiss();
         PanaraInfoDialog.show(
@@ -87,8 +87,9 @@ class SignInController extends GetxController {
                 children: <Widget>[
                   ListTile(
                     onTap: () {
-                      GlobalController.to.isStaging.value = false;
-                      GlobalController.to.baseUrl = ApiConstant.production;
+                      // GlobalController.to.isStaging.value = false;
+                      // GlobalController.to.baseUrl = ApiConstant.production;
+                      Get.offAllNamed(MainRoute.forgotPassword);
                     },
                     title: Text(
                       "Production",
