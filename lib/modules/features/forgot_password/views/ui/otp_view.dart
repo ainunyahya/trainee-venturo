@@ -63,7 +63,7 @@ class OtpView extends StatelessWidget {
             Image.asset(
               ImageConstant.logo,
               fit: BoxFit.contain,
-                          ),
+            ),
             SizedBox(height: 121.h),
             Obx(
               () => Text(
@@ -83,7 +83,7 @@ class OtpView extends StatelessWidget {
               pinputAutovalidateMode: PinputAutovalidateMode.onSubmit,
               keyboardType: TextInputType.number,
               validator: (value) {
-                if (value != "1234") {
+                if (value != "123456") {
                   return "Kode OTP salah";
                 }
                 return null;

@@ -47,7 +47,7 @@ class SignInController extends GetxController {
       formKey.currentState!.save();
       if (emailCtrl.text == "admin@gmail.com" && passwordCtrl.text == "admin") {
         EasyLoading.dismiss();
-        Get.offAllNamed(MainRoute.list);
+        Get.offNamed(MainRoute.bottomNavBar);
       } else {
         EasyLoading.dismiss();
         PanaraInfoDialog.show(

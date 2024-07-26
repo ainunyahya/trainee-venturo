@@ -23,7 +23,7 @@ class HttpService extends GetxService {
     String? authorization,
   }) {
     var headers = {
-'Content-Type': 'application/json',
+      'Content-Type': 'application/json',
       'Accept': 'application/json',
     };
 

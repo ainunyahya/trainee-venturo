@@ -24,9 +24,9 @@ class OtpController extends GetxController {
 
 
   void onOtpComplete(String value) {
-    if (value == "1234") {
+    if (value == "123456") {
       Get.snackbar("Sukses", "Kode Otp Valid",
-      duration: const Duration(seconds: 1));
+        duration: const Duration(seconds: 1));
     }
   }
 }

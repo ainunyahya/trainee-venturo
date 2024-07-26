@@ -9,6 +9,12 @@ class ForgotPasswordController extends GetxController {
   final TextEditingController emailCtrl = TextEditingController();
   var formKey = GlobalKey<FormState>();
 
-
   var emailValue = "".obs;
+
+  void sendOtp() {
+    if (formKey.currentState!.validate()) {
+      emailValue.value = emailCtrl.text;
+      Get.toNamed("/otp-input", arguments: emailCtrl.text);
+    }
+  }
 }

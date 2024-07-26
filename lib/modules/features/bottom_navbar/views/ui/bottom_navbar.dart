@@ -3,17 +3,8 @@ import 'package:get/get.dart';
 import 'package:trainee/modules/features/list/views/ui/pesanan_view.dart';
 import 'package:trainee/modules/features/list/views/ui/profile_view.dart';
 
-import '../features/list/views/ui/list_item_view.dart';
-
-
-
-class BottomNavbarController extends GetxController {
-  var currentIndex = 0.obs;
-
-  void changeTab(int index) {
-    currentIndex.value = index;
-  }
-}
+import '../../../list/views/ui/list_item_view.dart';
+import '../../controllers/bottom_navbar_controller.dart';
 
 class BottomNavbar extends StatelessWidget {
   const BottomNavbar({super.key});
