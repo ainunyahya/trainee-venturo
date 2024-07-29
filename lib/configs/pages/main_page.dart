@@ -1,6 +1,7 @@
 import 'package:get/route_manager.dart';
 import 'package:trainee/configs/routes/main_route.dart';
 import 'package:trainee/modules/features/bottom_navbar/bindings/bottom_navbar_binding.dart';
+import 'package:trainee/modules/features/detail_menu/views/ui/detail_menu_view.dart';
 import 'package:trainee/modules/features/forgot_password/bindings/forgot_password_binding.dart';
 import 'package:trainee/modules/features/forgot_password/bindings/otp_binding.dart';
 import 'package:trainee/modules/features/forgot_password/views/ui/forgot_password_view.dart';
@@ -17,6 +18,8 @@ import 'package:trainee/modules/features/splash_screen/view/ui/splash_screen.dar
 
 import '../../modules/features/bottom_navbar/views/ui/bottom_navbar.dart';
 import '../../modules/features/detail_promo/views/ui/detail_promo_view.dart';
+import '../../modules/features/initial/bindings/initial_binding.dart';
+import '../../modules/features/initial/views/ui/get_location_screen.dart';
 
 abstract class MainPage {
   static final main = [
@@ -45,11 +48,11 @@ abstract class MainPage {
       page: () => const OtpView(),
       binding: OtpBinding(),
     ),
-    // GetPage(
-    //   name: MainRoute.getLocationScreen,
-    //   page: () => const GetLocationScreen(),
-    //   binding: GetInitialBinding(),
-    // ),
+    GetPage(
+      name: MainRoute.getLocationScreen,
+      page: () => const GetLocationScreen(),
+      binding: GetInitialBinding(),
+    ),
     // GetPage(
     //   name: MainRoute.counter,
     //   page: () => const ConterView(),
@@ -78,6 +81,11 @@ abstract class MainPage {
     GetPage(
       name: MainRoute.detailPromo,
       page: () => const PromoDetailView(),
+      // binding: ListBinding(),
+    ),
+    GetPage(
+      name: MainRoute.detailMenu,
+      page: () => const DetailMenuView(),
       // binding: ListBinding(),
     ),
   ];

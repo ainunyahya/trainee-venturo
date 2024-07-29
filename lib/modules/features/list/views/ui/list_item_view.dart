@@ -170,7 +170,7 @@ class ListItemView extends StatelessWidget {
                                           .to.selectedItems
                                           .contains(item),
                                       onTap: () {
-                                        Get.toNamed(MainRoute.detailPromo,arguments: {
+                                        Get.toNamed(MainRoute.detailMenu,arguments: {
                                           'promoName': 'Promo $index',
                                           'discountNominal': '${index * 10}',
                                           'thumbnailUrl': "https://javacode.landa.id/img/promo/gambar_62661b52223ff.png",
