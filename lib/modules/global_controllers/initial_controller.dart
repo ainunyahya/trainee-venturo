@@ -1,57 +1,22 @@
 import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
-import 'package:permission_handler/permission_handler.dart';
 import 'package:trainee/configs/routes/main_route.dart';
-import 'package:trainee/modules/features/initial/views/ui/get_location_screen.dart';
+import 'package:trainee/modules/features/initial/views/ui/get_location_view.dart';
 import 'package:trainee/utils/services/location_service.dart';
-import 'package:trainee/utils/services/hive_service.dart';
 
 class InitialController extends GetxController {
+  static InitialController get to => Get.find();
+
+  /// Location
   RxString statusLocation = RxString('loading');
   RxString messageLocation = RxString('');
   Rxn<Position> position = Rxn<Position>();
   RxnString address = RxnString();
 
+  // user
   RxString id = RxString('');
   RxString name = RxString('');
   RxString photo = RxString('');
-
-  Future<void> getLocation() async {
-    if (Get.isDialogOpen != true) {
-      Get.dialog(const GetLocationScreen(), barrierDismissible: false);
-    }
-
-    // Meminta izin lokasi
-    var status = await Permission.locationWhenInUse.status;
-    if (status.isDenied) {
-      status = await Permission.locationWhenInUse.request();
-    }
-
-    if (status.isGranted) {
-      try {
-        statusLocation.value = 'loading';
-        final locationResult = await LocationServices.getCurrentPosition();
-
-        if (locationResult.success) {
-          position.value = locationResult.position;
-          address.value = locationResult.address;
-          statusLocation.value = 'success';
-
-          await Future.delayed(const Duration(seconds: 2));
-          Get.until((route) => route.settings.name == MainRoute.list);
-        } else {
-          statusLocation.value = 'error';
-          messageLocation.value = locationResult.message!;
-        }
-      } catch (e) {
-        statusLocation.value = 'error';
-        messageLocation.value = 'Server error'.tr;
-      }
-    } else {
-      statusLocation.value = 'error';
-      messageLocation.value = 'Permission denied'.tr;
-    }
-  }
 
   @override
   void onReady() {
@@ -59,8 +24,37 @@ class InitialController extends GetxController {
     getLocation();
     LocationServices.streamService.listen((status) => getLocation());
 
-    id.value = HiveService.get("id") ?? ''; 
-    name.value = HiveService.get("name") ?? ''; 
-    photo.value = HiveService.get("photo") ?? ''; 
+    // id.value = HiveService.get("id") ?? ''; 
+    // name.value = HiveService.get("name") ?? ''; 
+    // photo.value = HiveService.get("photo") ?? ''; 
   }
+
+  Future<void> getLocation() async {
+    if (Get.isDialogOpen == false) {
+      Get.dialog(const GetLocationScreen(), barrierDismissible: false);
+    }
+
+    try {
+      /// Mendapatkan Lokasi saat ini
+      statusLocation.value = 'loading';
+      final locationResult = await LocationServices.getCurrentPosition();
+      if (locationResult.success) {
+        /// Jika jarak lokasi cukup dekat, dapatkan informasi alamat
+        position.value = locationResult.position;
+        address.value = locationResult.address;
+        statusLocation.value = 'success';
+        await Future.delayed(const Duration(seconds: 3));
+        Get.offAllNamed(MainRoute.list);
+      } else {
+        /// Jika jarak lokasi tidak cukup dekat, tampilkan pesan
+        statusLocation.value = 'error';
+        messageLocation.value = locationResult.message!;
+      }
+    } catch (e) {
+      /// Jika terjadi kesalahan server
+      statusLocation.value = 'error';
+      messageLocation.value = 'Server error'.tr;
+    }
+  }
+
 }

@@ -13,8 +13,7 @@ class GetLocationScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final InitialController initialController = Get.find<InitialController>();
-
+    
     return Scaffold(
       // ignore: deprecated_member_use
       body: WillPopScope(
@@ -35,13 +34,24 @@ class GetLocationScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisSize: MainAxisSize.min,
             children: [
-              Text(
-                'Searching location...'.tr,
-                style: Get.textTheme.titleLarge!
-                    .copyWith(color: AppColor.kDarkColor.withOpacity(0.5)),
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(height: 50.h),
+              Obx(() {
+                if (InitialController.to.statusLocation.value == 'loading') {
+                  return Text(
+                    'Mencari lokasimu...',
+                    style: Get.textTheme.titleLarge!
+                        .copyWith(color: AppColor.kDarkColor.withOpacity(0.5)),
+                    textAlign: TextAlign.center,
+                  );
+                } else {
+                  return Text(
+                    'Lokasimu',
+                    style: Get.textTheme.titleLarge!
+                        .copyWith(color: AppColor.kDarkColor.withOpacity(0.5)),
+                    textAlign: TextAlign.center,
+                  );
+                }
+              }),
+              50.verticalSpacingRadius,
               Stack(
                 children: [
                   Image.asset(
@@ -57,9 +67,9 @@ class GetLocationScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              SizedBox(height: 50.h),
+              50.verticalSpacingRadius,
               Obx(() {
-                final status = initialController.statusLocation.value;
+                final status = InitialController.to.statusLocation.value;
                 return Conditional.single(
                   context: context,
                   conditionBuilder: (context) => status == 'error',
@@ -67,7 +77,7 @@ class GetLocationScreen extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        initialController.messageLocation.value,
+                        InitialController.to.messageLocation.value,
                         style: Get.textTheme.titleLarge,
                         textAlign: TextAlign.center,
                       ),
@@ -103,7 +113,7 @@ class GetLocationScreen extends StatelessWidget {
                     context: context,
                     conditionBuilder: (context) => status == 'success',
                     widgetBuilder: (context) => Text(
-                      initialController.address.value!,
+                      InitialController.to.address.value!,
                       style: Get.textTheme.titleLarge,
                       textAlign: TextAlign.center,
                     ),

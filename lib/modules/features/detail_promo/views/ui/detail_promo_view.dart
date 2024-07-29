@@ -39,7 +39,7 @@ class PromoDetailView extends StatelessWidget {
                   width: double.infinity,
                   onTap: null, // onTap di-nonaktifkan
                   ),
-                  const SizedBox(height: 36),
+                  const SizedBox(height: 20),
                   // Text(
                   //   arg['promoName'],
                   //   style: const TextStyle(
