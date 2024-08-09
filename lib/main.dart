@@ -9,7 +9,7 @@ import 'package:trainee/configs/routes/main_route.dart';
 import 'package:trainee/configs/themes/main_theme.dart';
 
 import 'package:firebase_core/firebase_core.dart';
-import 'package:trainee/modules/global_bindings/global_binding.dart';
+import 'package:trainee/shared/global_bindings/global_binding.dart';
 import 'firebase_options.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 

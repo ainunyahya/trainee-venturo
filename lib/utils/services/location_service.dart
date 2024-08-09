@@ -8,7 +8,7 @@ class LocationServices {
   LocationServices._();
 
   static Stream<ServiceStatus> streamService =
-  Geolocator.getServiceStatusStream();
+    Geolocator.getServiceStatusStream();
 
   /// Mendapatkan informasi lokasi
   static Future<LocationResult> getCurrentPosition() async {
@@ -54,12 +54,12 @@ class LocationServices {
     double distanceInMeters = Geolocator.distanceBetween(
       position.latitude,
       position.longitude,
-      AppConstants.locationLatitude,
-      AppConstants.locationLongitude,
+      AppConstant.locationLatitude,
+      AppConstant.locationLongitude,
     );
 
     /// Apakah jarak lokasi dekat dengan lokasi Java Code dalam radius yang ditentukan?
-    if (distanceInMeters > AppConstants.maximumDistance) {
+    if (distanceInMeters > AppConstant.maximumDistance) {
       /// Jika tidak, kirim pesan error
       return LocationResult.error(message: 'Distance not close'.tr);
     }

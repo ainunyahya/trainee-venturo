@@ -1,5 +1,6 @@
 {
     "cmake.ignoreCMakeListsMissing": true,
     "java.configuration.updateBuildConfiguration": "automatic",
-    "cmake.configureOnOpen": true
+    "cmake.configureOnOpen": true,
+    "winopacity.opacity": 50
 }

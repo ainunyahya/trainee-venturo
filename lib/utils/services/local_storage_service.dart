@@ -1,23 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class LocalStorageService extends GetxService {
   LocalStorageService._();
   static final box = Hive.box("venturo");
-
-  /// Kode untuk setting localstorage sesuai dengan repository
-  // static Future<void> setAuth(Data serverSelected) async {
-  //   await box.put("id", serverSelected.user!.id);
-  //   await box.put("name", serverSelected.user!.nama);
-  //   await box.put("photo", serverSelected.user!.humanisFoto);
-  //   await box.put("roles", serverSelected.user!.jabatan);
-  //   await box.put("isLogin", true);
-
-  //   /// Log id user
-  //   await FirebaseAnalytics.instance.setUserId(
-  //     id: serverSelected.user!.id.toString(),
-  //   );
-  // }
 
   static Future deleteAuth() async {
     if (box.get("isRememberMe") == false) {
@@ -26,5 +13,29 @@ class LocalStorageService extends GetxService {
     } else {
       box.put("isLogin", false);
     }
+  }
+
+  static Future signInAuth(String email, String password, responseData) async {
+    box.put("isLogin", true);
+    box.put("isLoginEmail", true);
+    box.put("email", email);
+    box.put("password", password);
+    box.put("password", password);
+    box.put("response_data", responseData);
+  }
+
+  static Future signInGmailAuth(UserCredential userCredential) async {
+    box.put("isLogin", true);
+    box.put("isLoginGmail", true);
+    box.put("email", userCredential.user!.email);
+    box.put("cred", userCredential.credential!.providerId);
+  }
+
+  static Future<bool> isLogin() async {
+    return box.get("isLogin") ?? false;
+  }
+
+  static getUserData(){
+    return box.get("response_data");
   }
 }
