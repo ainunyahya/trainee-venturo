@@ -89,7 +89,7 @@ class SignInController extends GetxController {
         LocalStorageService.signInAuth(email, password, response.data);
         // print("saya ingin print token");
         // print(response.data);
-        Get.offAllNamed(MainRoute.getLocationScreen);
+        Get.offAllNamed(MainRoute.bottomNavBar);
       } else {
         PanaraInfoDialog.show(context,
             title: "Login Gagal",

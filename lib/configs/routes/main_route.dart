@@ -13,4 +13,6 @@ abstract class MainRoute {
   static const String profile = '/profile';
   static const String detailPromo = '/detail-promo';
   static const String detailMenu = '/detail-menu';
+  static const String checkout = '/checkout';
+  static const String order = '/order';
 }

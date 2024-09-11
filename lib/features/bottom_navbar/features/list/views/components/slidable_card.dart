@@ -13,7 +13,7 @@ class SlidableCardComponent extends StatelessWidget {
     required this.item,
   });
 
-  final DataMenu item;
+  final MenuModel item;
 
   @override
   Widget build(BuildContext context) {

@@ -14,21 +14,20 @@ class PromoRepository {
   // get user data from LocalStorageService
   static final _userData = LocalStorageService.getUserData();
 
-  static Future<PromosModel> getAllPromo() async {
+  static Future<AllPromoAPIModel> getAllPromo() async {
     try {
       final response = await _dio.get(
         ApiConstant.getAllPromo,
         options: Options(
           headers: {
-            "token": "5b90e85d28255df4e6c4e57053d0a87063157de3",
-            // "token": _userData["data"]["token"],
+            "token": _userData["data"]["token"],
           },
         ),
       );
       if (response.statusCode == 200) {
         // print("Promos data: ${response.data["data"][0]}");
         // print(PromosModel.fromJson(response.data).toString());
-        return PromosModel.fromJson(response.data);
+        return AllPromoAPIModel.fromJson(response.data);
       } else {
         final errorData = response.data;
         final errorMessage =

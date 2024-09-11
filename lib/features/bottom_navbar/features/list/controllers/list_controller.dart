@@ -1,19 +1,17 @@
 import 'package:get/get.dart';
-import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:trainee/features/bottom_navbar/features/list/models/menu_model.dart';
 import 'package:trainee/features/bottom_navbar/features/list/models/promo_model.dart';
 import 'package:trainee/features/bottom_navbar/features/list/repositories/menu_repository.dart';
 import 'package:trainee/features/bottom_navbar/features/list/repositories/promo_repository.dart';
 
-
-
 class ListController extends GetxController {
   static ListController get to => Get.find<ListController>();
   final RxInt page = 0.obs;
-  final RxList<DataPromo> promoItems = <DataPromo>[].obs;
-  final RxList<DataMenu> menuItems = <DataMenu>[].obs;
-  final RxList<DataMenu> selectedItems = <DataMenu>[].obs;
+  final RxList<PromoModel> promoItems = <PromoModel>[].obs;
+  final RxList<MenuModel> menuItems = <MenuModel>[].obs;
+  final RxList<MenuModel> selectedItems = <MenuModel>[].obs;
   final RxBool canLoadMore = true.obs;
   final RxString selectedCategory = 'All'.obs;
   final RxString keyword = ''.obs;
@@ -29,9 +27,7 @@ class ListController extends GetxController {
   @override
   void onInit() async {
     super.onInit();
-    // print("tesssss1111111111");
     await getAllMenus();
-    // print("tesssssttt");
     await getAllPromos();
     // await getListOfData();
   }
@@ -52,8 +48,7 @@ class ListController extends GetxController {
   // ======== MENU Section ===========
   Future<void> getAllMenus() async {
     try {
-      // print("get all menus");
-      MenusModel menus = await MenuRepository.getAllMenu();
+      AllMenuAPIModel menus = await MenuRepository.getAllMenu();
       // print("menus: ${menus.toString()}");
       menuItems.value = menus.dataMenus!;
       // print("menuItems: $menuItems");
@@ -67,7 +62,7 @@ class ListController extends GetxController {
     }
   }
 
-  List<DataMenu> get filteredMenuList {
+  List<MenuModel> get filteredMenuList {
     return menuItems.where((item) {
       if (selectedCategory.value.toLowerCase() == 'all') {
         return true;
@@ -82,7 +77,7 @@ class ListController extends GetxController {
     }).toList();
   }
 
-  Future<void> deleteMenuItem(DataMenu item) async {
+  Future<void> deleteMenuItem(MenuModel item) async {
     try {
       menuItems.remove(item);
       selectedItems.remove(item);
@@ -98,7 +93,7 @@ class ListController extends GetxController {
   Future<void> getAllPromos() async {
     try {
       // print("Get All Promos");
-      PromosModel promos = await PromoRepository.getAllPromo();
+      AllPromoAPIModel promos = await PromoRepository.getAllPromo();
       // print("tesss======== " + promos.dataPromos.toString());
       promoItems.value = promos.dataPromos!;
     } catch (exception, stacktrace) {

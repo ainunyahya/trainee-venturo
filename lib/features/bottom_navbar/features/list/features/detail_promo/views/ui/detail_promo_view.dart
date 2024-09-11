@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:trainee/features/bottom_navbar/features/list/features/detail_promo/controllers/detail_promo_controller.dart';
 import 'package:trainee/features/bottom_navbar/features/list/features/detail_promo/views/components/content.dart';
 
-import '../../../../views/components/promo_card.dart';
 import '../components/header_section.dart';
 
 class PromoDetailView extends StatelessWidget {

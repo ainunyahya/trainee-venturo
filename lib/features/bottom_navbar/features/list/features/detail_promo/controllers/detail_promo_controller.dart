@@ -5,5 +5,5 @@ import 'package:trainee/features/bottom_navbar/features/list/models/promo_model.
 class DetailPromoController extends GetxController {
   static DetailPromoController get to => Get.find<DetailPromoController>();
 
-  final PromosModel arg = Get.arguments;
+  final AllPromoAPIModel arg = Get.arguments;
 }

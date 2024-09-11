@@ -2,17 +2,24 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:trainee/features/bottom_navbar/features/list/features/checkout/views/components/quantity_counter.dart';
 import 'package:trainee/features/bottom_navbar/features/list/models/menu_model.dart';
 
 class MenuCard extends StatelessWidget {
-  final DataMenu menu;
+  final MenuModel menu;
   final bool isSelected;
+  final int? quantity;
+  final void Function()? onIncrement;
+  final void Function()? onDecrement;
   final void Function()? onTap;
 
   const MenuCard({
     super.key,
     required this.menu,
     this.onTap,
+    this.onIncrement,
+    this.onDecrement,
+    this.quantity,
     this.isSelected = false,
   });
 
@@ -32,6 +39,14 @@ class MenuCard extends StatelessWidget {
                 : Colors.transparent,
             width: 2.w,
           ),
+          boxShadow: const [
+            BoxShadow(
+              color: Colors.black45,
+              offset: Offset(0, 2),
+              blurRadius: 8,
+              spreadRadius: -1,
+            ),
+          ],
         ),
         child: Row(
           children: [
@@ -46,13 +61,10 @@ class MenuCard extends StatelessWidget {
                 color: Colors.grey[100],
               ),
               child: CachedNetworkImage(
-                imageUrl: menu.foto!,
+                imageUrl: menu.foto! ??
+                    'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/240px-No_image_available.svg.png',
                 useOldImageOnUrlChange: true,
                 fit: BoxFit.contain,
-                errorWidget: (context, url, error) => const Icon(
-                  Icons.error,
-                  color: Colors.red,
-                ),
               ),
             ),
 
@@ -69,12 +81,27 @@ class MenuCard extends StatelessWidget {
                     maxLines: 1,
                   ),
                   Text(
-                    menu.harga.toString(),
+                    "Rp ${menu.harga!}",
                     style: Get.textTheme.bodyMedium!.copyWith(
                         color: Theme.of(context).primaryColor,
                         fontWeight: FontWeight.bold),
                   ),
                 ],
+              ),
+            ),
+
+            // qty counter
+            Container(
+              height: 75.r,
+              padding: EdgeInsets.only(left: 12.r, right: 5.r),
+              child: InkWell(
+                onTap: () {},
+                splashFactory: NoSplash.splashFactory,
+                child: QuantityCounter(
+                  quantity: quantity ?? 0,
+                  onIncrement: onIncrement,
+                  onDecrement: onDecrement,
+                ),
               ),
             ),
           ],
