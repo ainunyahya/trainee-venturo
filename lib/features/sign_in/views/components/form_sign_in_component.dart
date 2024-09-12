@@ -45,9 +45,9 @@ class FormSignInComponent extends StatelessWidget {
                   heightFactor: 1.0,
                   child: Icon(
                     SignInController.to.isPassword.value == true
-                        ? Icons.visibility
-                        : Icons.visibility_off,
-                    size: 16,
+                        ? Icons.visibility_off
+                        : Icons.visibility,
+                    size: 22.h,
                     color: MainColor.grey,
                   ),
                 ),

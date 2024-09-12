@@ -78,8 +78,8 @@ class SignInController extends GetxController {
     Dio dio = DioService.dioCall();
     try {
       final response = await dio.post(ApiConstant.loginAuth, data: {
-        email: email,
-        password: password,
+        'email': email,
+        'password': password,
       });
     //   print("Respons diterima dari server...");
     // print("Status code: ${response.statusCode}");

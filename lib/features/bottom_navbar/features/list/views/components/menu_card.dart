@@ -39,14 +39,14 @@ class MenuCard extends StatelessWidget {
                 : Colors.transparent,
             width: 2.w,
           ),
-          boxShadow: const [
-            BoxShadow(
-              color: Colors.black45,
-              offset: Offset(0, 2),
-              blurRadius: 8,
-              spreadRadius: -1,
-            ),
-          ],
+          // boxShadow: const [
+          //   BoxShadow(
+          //     color: Colors.black45,
+          //     offset: Offset(0, 2),
+          //     blurRadius: 8,
+          //     spreadRadius: -1,
+          //   ),
+          // ],
         ),
         child: Row(
           children: [
@@ -61,9 +61,9 @@ class MenuCard extends StatelessWidget {
                 color: Colors.grey[100],
               ),
               child: CachedNetworkImage(
-                imageUrl: menu.foto! ??
-                    'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/240px-No_image_available.svg.png',
+                imageUrl: menu.foto!,
                 useOldImageOnUrlChange: true,
+                errorWidget: (context, url, error) => const Icon(Icons.error),
                 fit: BoxFit.contain,
               ),
             ),
@@ -89,7 +89,6 @@ class MenuCard extends StatelessWidget {
                 ],
               ),
             ),
-
             // qty counter
             Container(
               height: 75.r,

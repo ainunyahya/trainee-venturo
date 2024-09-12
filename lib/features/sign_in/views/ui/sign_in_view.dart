@@ -49,129 +49,177 @@ class SignInView extends StatelessWidget {
       );
     }
 
-    return Scaffold(
-      appBar: null,
-      extendBody: false,
-      backgroundColor: MainColor.white,
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(45),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              SizedBox(height: 121.h),
-              GestureDetector(
-                onDoubleTap: () => SignInController.to.flavorSeting(),
-                child: Image.asset(
-                  ImageConstant.logo,
-                  fit: BoxFit.contain,
-                ),
-              ),
-              SizedBox(height: 121.h),
-              Text(
-                'Masuk untuk melanjutkan!',
-                style: GoogleTextStyle.fw600.copyWith(
-                  fontSize: 22.sp,
-                  color: MainColor.black,
-                ),
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(height: 40.h),
-              const FormSignInComponent(),
-              SizedBox(height: 10.h),
-              Row(
-                children: [
-                  const Spacer(),
-                  GestureDetector(
-                    onTap: () {
-                      Get.toNamed(MainRoute.forgotPassword);
-                    },
-                    child: const Text(
-                      "Lupa password?",
-                      style: TextStyle(fontWeight: FontWeight.bold),                      
+    return SafeArea(
+      child: Scaffold(
+        appBar: null,
+        extendBody: false,
+        backgroundColor: MainColor.white,
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(45),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 35.h),
+                Center(
+                  child: GestureDetector(
+                    onDoubleTap: () => SignInController.to.flavorSeting(),
+                    child: Image.asset(
+                      ImageConstant.logo,
+                      fit: BoxFit.contain,
+                      height: 91.h,
+                      width: 270.w,
                     ),
-                  )
-                ]
-              ),
-              SizedBox(height: 30.h),
-              ElevatedButton(
-                style: EvelatedButtonStyle.mainRounded,
-                onPressed: () => SignInController.to.validateForm(context),
-                child: Text(
-                  "Masuk",
-                  style: GoogleTextStyle.fw800.copyWith(
-                    fontSize: 14.sp,
-                    color: MainColor.white,
+                  ),
+                ),
+                SizedBox(height: 121.h),
+                Text(
+                  'Masuk untuk melanjutkan!',
+                  style: GoogleTextStyle.fw600.copyWith(
+                    fontSize: 22.sp,
+                    color: MainColor.black,
                   ),
                   textAlign: TextAlign.center,
                 ),
-              ),
-              SizedBox(height: 10.h),
-              const Row(
-                children: [
-                  Expanded(
-                    child: Divider(
-                    thickness: 1,
+                SizedBox(height: 40.h),
+                const FormSignInComponent(),
+                SizedBox(height: 10.h),
+                Row(
+                  children: [
+                    const Spacer(),
+                    GestureDetector(
+                      onTap: () {
+                        Get.toNamed(MainRoute.forgotPassword);
+                      },
+                      child: const Text(
+                        "Lupa password?",
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          color: Colors.red
+                        ),                      
+                      ),
+                    )
+                  ]
+                ),
+                SizedBox(height: 30.h),
+                ElevatedButton(
+                  style: ElevatedButtonStyle.mainRounded(
+                    shadowColor: Colors.black, 
+                    elevation: 10.0, 
+                  ),
+                  onPressed: () => SignInController.to.validateForm(context),
+                  child: Text(
+                    "Masuk",
+                    style: GoogleTextStyle.fw800.copyWith(
+                      fontSize: 14.sp,
+                      color: MainColor.white,
                     ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 10),
-                    child: Text("atau")
-                  ),
-                  Expanded(
-                    child: Divider(
-                    thickness: 1,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 10.h),
-              ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor:
-                    WidgetStateProperty.all<Color>(Colors.white),
-                  shape: WidgetStateProperty.all<RoundedRectangleBorder>(
-                    RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18.0),
-                    ),
-                  ),
-                  minimumSize: WidgetStateProperty.all<Size>(
-                    const Size(double.infinity, 50),
+                    textAlign: TextAlign.center,
                   ),
                 ),
-                onPressed: () {
-                  SignInController.to.gmailFirebaseAuth(context);
-                },
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                SizedBox(height: 77.h),
+                Row(
                   children: [
-                    Image.asset(
-                      ImageConstant.googleLogo,
-                      width: 30,
+                    Expanded(
+                      child: Divider(
+                      thickness: 1,
+                      color: Colors.grey[400],
+                      ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "Masuk menggunakan ",
-                          style: GoogleTextStyle.fw400
-                            .copyWith(color: MainColor.black),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Text(
+                        "atau",
+                        style: TextStyle(
+                          color: Colors.grey[500]
                         ),
-                        Text(
-                          "Google",
-                          style: GoogleTextStyle.fw700
-                            .copyWith(color: MainColor.black),
-                        ),
-                        Container(
-                          width: 30,
-                        ),
-                      ],
+                      )
+                    ),
+                    Expanded(
+                      child: Divider(
+                      thickness: 1,
+                      color: Colors.grey[400],
+                      ),
                     ),
                   ],
                 ),
-              ),
-            ],
+                SizedBox(height: 10.h),
+                ElevatedButton(
+                  style: ElevatedButtonStyle.mainRounded(
+                    backgroundColor: Colors.white,
+                    shadowColor: Colors.black, 
+                    elevation: 5.0,
+                  ),
+                  onPressed: () => SignInController.to.gmailFirebaseAuth(context),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Image.asset(
+                        ImageConstant.googleLogo,
+                        width: 24.w,
+                        height: 22.h,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Masuk menggunakan ",
+                            style: GoogleTextStyle.fw400
+                              .copyWith(color: MainColor.black),
+                          ),
+                          Text(
+                            "Google",
+                            style: GoogleTextStyle.fw700
+                              .copyWith(color: MainColor.black),
+                          ),
+                          Container(
+                            width: 20,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 10.h),
+                ElevatedButton(
+                  style: ElevatedButtonStyle.mainRounded(
+                    backgroundColor: Colors.black,
+                    shadowColor: Colors.black, 
+                    elevation: 5.0,
+                  ),
+                  onPressed: () => SignInController.to.gmailFirebaseAuth(context),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Image.asset(
+                        ImageConstant.appleLogo,
+                        width: 26.w,
+                        height: 24.h,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Text(
+                            "Masuk menggunakan ",
+                            style: GoogleTextStyle.fw400
+                              .copyWith(color: MainColor.white),
+                          ),
+                          Text(
+                            "Apple",
+                            style: GoogleTextStyle.fw700
+                              .copyWith(color: MainColor.white),
+                          ),
+                          Container(
+                            width: 20,
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

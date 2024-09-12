@@ -20,7 +20,6 @@ class LocalStorageService extends GetxService {
     box.put("isLoginEmail", true);
     box.put("email", email);
     box.put("password", password);
-    box.put("password", password);
     box.put("response_data", responseData);
   }
 

@@ -54,8 +54,13 @@ class TextFormFieldCustoms extends StatelessWidget {
               color: MainColor.grey,
             ),
             counterText: "",
-            contentPadding: EdgeInsets.symmetric(vertical: 10.h),
+            isCollapsed: true,
+            contentPadding: EdgeInsets.only(top: 5.h, bottom: 2.h),
             suffixIcon: suffixIcon,
+            suffixIconConstraints: BoxConstraints(
+              maxHeight: 22.h, // Sesuaikan tinggi maksimal suffixIcon
+              maxWidth: 25.w, // Sesuaikan lebar maksimal suffixIcon
+            ),
             border: const UnderlineInputBorder(
               borderSide: BorderSide(
                 width: 1,

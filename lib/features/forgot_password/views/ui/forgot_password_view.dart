@@ -95,7 +95,7 @@ class ForgotPasswordView extends StatelessWidget {
               ),
               SizedBox(height: 40.h),
               ElevatedButton(
-                style: EvelatedButtonStyle.mainRounded,
+                style:  ElevatedButtonStyle.mainRounded(),
                 onPressed: () =>
                     ForgotPasswordController.to.validateForm(context),
                 child: Text(

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
+import 'package:trainee/constants/cores/assets/image_constant.dart';
 import 'package:trainee/features/bottom_navbar/features/list/controllers/list_controller.dart';
 import 'package:trainee/features/bottom_navbar/features/list/views/components/search_app_bar.dart';
 import 'package:trainee/features/bottom_navbar/features/list/views/components/slidable_card.dart';
@@ -32,8 +33,8 @@ class ListItemView extends StatelessWidget {
                 // list of promo
                 const SliverToBoxAdapter(
                   child: SectionHeader(
-                    icon: Icons.note_alt_outlined,
-                    title: 'Available promo',
+                    image: ImageConstant.promo,
+                    title: 'Promo yang Tersedia',
                   ),
                 ),
                 SliverToBoxAdapter(child: 22.verticalSpace),
@@ -41,33 +42,35 @@ class ListItemView extends StatelessWidget {
                   child: SizedBox(
                     width: 1.sw,
                     height: 188.h,
-                    child: ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      shrinkWrap: true,
-                      padding: EdgeInsets.symmetric(horizontal: 25.w),
-                      itemBuilder: (context, index) {
-                        return PromoCard(
-                          isVoucher: ListController
-                            .to.promoItems[index].type ==
-                            "voucher" ? true : false,
-                          enableShadow: false,
-                          promoName: ListController.to.promoItems[index].nama!,
-                          discountNominal: ListController
-                            .to.promoItems[index].nominal.toString(),
-                          thumbnailUrl:
-                              "https://javacode.landa.id/img/promo/gambar_62661b52223ff.png",
-                          onTap: () {
-                            Get.toNamed(
-                              MainRoute.detailPromo,
-                              arguments: {
-                                ListController.to.promoItems[index],
+                    child: Obx(
+                      () => ListView.separated(
+                        scrollDirection: Axis.horizontal,
+                        shrinkWrap: true,
+                        padding: EdgeInsets.symmetric(horizontal: 25.w),
+                        itemBuilder: (context, index) {
+                          return Obx(
+                            () => PromoCard(
+                              isVoucher: ListController
+                                .to.promoItems[index].type == "voucher" ? true : false,
+                              enableShadow: false,
+                              promoName: ListController.to.promoItems[index].nama!,
+                              discountNominal: ListController
+                                .to.promoItems[index].nominal.toString(),
+                              thumbnailUrl:
+                                  "https://javacode.landa.id/img/promo/gambar_62661b52223ff.png",
+                              onTap: () {
+                                Get.toNamed(
+                                  MainRoute.detailPromo,
+                                  arguments: ListController.to.promoItems[index],
+                                  
+                                );
                               },
-                            );
-                          },
-                        );
-                      },
-                      separatorBuilder: (context, index) => 26.horizontalSpace,
-                      itemCount: ListController.to.promoItems.length,
+                            ),
+                          );
+                        },
+                        separatorBuilder: (context, index) => 26.horizontalSpace,
+                        itemCount: ListController.to.promoItems.length,
+                      ),
                     ),
                   ),
                 ),
@@ -83,15 +86,27 @@ class ListItemView extends StatelessWidget {
                       padding: EdgeInsets.symmetric(horizontal: 25.w),
                       itemBuilder: (context, index) {
                         final category = ListController.to.categories[index];
+                        String imageChip;
+                        if (category == ListController.to.categories[0]) {
+                          imageChip = ImageConstant.list;
+                        } else if (category ==
+                            ListController.to.categories[1]) {
+                          imageChip = ImageConstant.makanan;
+                        } else if (category ==
+                            ListController.to.categories[2]) {
+                          imageChip = ImageConstant.makanan;
+                        } else {
+                          imageChip = ImageConstant.snack;
+                        }
                         return Obx(() => MenuChip(
                           onTap: () {
-                            ListController.to
-                              .selectedCategory(category);
+                            ListController.to.selectedCategory(category);
                           },
                           isSelected:
                             ListController.to.selectedCategory.value ==
                               category,
                           text: category,
+                          image: imageChip,
                         ));
                       },
                       separatorBuilder: (context, index) => 13.horizontalSpace,
@@ -107,14 +122,17 @@ class ListItemView extends StatelessWidget {
                 Obx(() {
                   final currentCategory =
                     ListController.to.selectedCategory.value;
-                  var iconSection = Icons.menu_book;
+                  var imageSection = ImageConstant.list;
                   if (currentCategory == ListController.to.categories[1]) {
-                    iconSection = Icons.food_bank;
+                    imageSection = ImageConstant.makanan;
                   } else if (currentCategory ==
                       ListController.to.categories[2]) {
-                    iconSection = Icons.local_drink;
+                    imageSection = ImageConstant.minuman;
+                  } else if (currentCategory ==
+                      ListController.to.categories[3]) {
+                    imageSection = ImageConstant.snack;
                   } else {
-                    iconSection = Icons.menu_book;
+                    imageSection = ImageConstant.list;
                   }
                   return Container(
                     width: 1.sw,
@@ -123,7 +141,7 @@ class ListItemView extends StatelessWidget {
                     margin: EdgeInsets.only(bottom: 10.h),
                     child: SectionHeader(
                       title: currentCategory,
-                      icon: iconSection,
+                      image: imageSection,
                     ),
                   );
                 }),

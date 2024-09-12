@@ -1,19 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:trainee/configs/themes/main_color.dart';
 
 class SectionHeader extends StatelessWidget {
   const SectionHeader({
     super.key,
     this.color,
     required this.title,
-    this.icon,
+    this.image,
+    this.width,
+    this.height
   });
 
 
   final String title;
   final Color? color;
-  final IconData? icon;
+  final String? image;
+  final double? width;
+  final double? height;
 
 
   @override
@@ -23,8 +28,12 @@ class SectionHeader extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Icon(icon,
-              size: 28.r, color: color ?? Theme.of(context).primaryColor),
+         image != null 
+            ? Image.asset(image!,
+            color: MainColor.primary,
+            width: width ?? 23.w, 
+            height: height ?? 16.h,)
+            : const SizedBox.shrink(),
           10.horizontalSpace,
           Text(title,
               style: Get.textTheme.titleMedium?.copyWith(

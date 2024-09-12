@@ -2,6 +2,7 @@ import 'package:get/route_manager.dart';
 import 'package:trainee/configs/routes/main_route.dart';
 import 'package:trainee/features/bottom_navbar/bindings/bottom_navbar_binding.dart';
 import 'package:trainee/features/bottom_navbar/features/list/features/detail_menu/views/ui/detail_menu_view.dart';
+import 'package:trainee/features/bottom_navbar/features/list/features/detail_promo/bindings/detail_promo_binding.dart';
 import 'package:trainee/features/forgot_password/bindings/forgot_password_binding.dart';
 import 'package:trainee/features/forgot_password/bindings/otp_binding.dart';
 import 'package:trainee/features/forgot_password/views/ui/forgot_password_view.dart';
@@ -64,13 +65,14 @@ abstract class MainPage {
       binding: BottomNavbarBinding(),
       bindings: [
         ListBinding(),
-        
-      ]
-    ),
-    GetPage(
+      ],
+      children: [
+        GetPage(
       name: MainRoute.list,
       page: () => const ListItemView(),
       binding: ListBinding(),
+    ),
+      ]
     ),
     GetPage(
       name: MainRoute.pesanan,
@@ -85,7 +87,7 @@ abstract class MainPage {
     GetPage(
       name: MainRoute.detailPromo,
       page: () => PromoDetailView(),
-      // binding: ListBinding(),
+      binding: DetailPromoBinding(),
     ),
     GetPage(
       name: MainRoute.detailMenu,
