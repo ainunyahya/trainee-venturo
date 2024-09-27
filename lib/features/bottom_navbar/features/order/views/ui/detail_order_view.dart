@@ -4,8 +4,8 @@ import 'package:flutter_conditional_rendering/conditional.dart';
 import 'package:flutter_conditional_rendering/conditional_switch.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:trainee/constants/cores/assets/image_constant.dart';
 import 'package:trainee/features/bottom_navbar/features/list/views/components/section_header.dart';
-
 
 import '../../controllers/detail_order_controller.dart';
 import '../components/order_list_sliver.dart';
@@ -26,8 +26,8 @@ class DetailOrderView extends StatelessWidget {
 
     return Scaffold(
       appBar: RoundedAppBar(
-        title: 'Order',
-        icon: Icons.shopping_bag_outlined,
+        title: 'Pesanan',
+        image: ImageConstant.pesanan,
         actions: [
           Obx(
             () => Conditional.single(
@@ -146,7 +146,7 @@ class DetailOrderView extends StatelessWidget {
                             DetailOrderController.to.order.value?['potongan'] >
                                 0,
                         widgetBuilder: (context) => TileOption(
-                          icon: Icons.discount_outlined,
+                          image: ImageConstant.diskon,
                           iconSize: 24.r,
                           title: 'Discount',
                           message:
@@ -168,7 +168,7 @@ class DetailOrderView extends StatelessWidget {
                                 .to.order.value?['id_voucher'] !=
                             0,
                         widgetBuilder: (context) => TileOption(
-                          icon: Icons.discount,
+                          image: ImageConstant.voucher,
                           iconSize: 24.r,
                           title: 'voucher'.tr,
                           message:
@@ -186,7 +186,7 @@ class DetailOrderView extends StatelessWidget {
 
                       // Payment options tile
                       TileOption(
-                        icon: Icons.payment_outlined,
+                        image: ImageConstant.pembayaran,
                         iconSize: 24.r,
                         title: 'Payment'.tr,
                         message: 'Pay Later',

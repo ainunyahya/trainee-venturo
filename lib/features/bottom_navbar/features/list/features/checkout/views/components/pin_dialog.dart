@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:pinput/pinput.dart';
+import 'package:trainee/configs/themes/main_color.dart';
 
 class PinDialog extends StatefulWidget {
   final String pin;
@@ -58,88 +59,91 @@ class _PinDialogState extends State<PinDialog> {
       ),
     );
 
-    return Padding(
-      padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 6.w),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          // title
-          Text(
-            'Verify order',
-            style: Get.textTheme.labelLarge,
-          ),
+    return Container(
+      color: MainColor.white,
+      child: Padding(
+        padding: EdgeInsets.symmetric(vertical: 15.h, horizontal: 6.w),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            // title
+            Text(
+              'Verifikasi Pesanan',
+              style: Get.textTheme.labelLarge,
+            ),
 
-          // subtitle
-          Text(
-            'Enter PIN code',
-            style: Get.textTheme.bodySmall!.copyWith(color: Colors.black),
-          ),
-          24.verticalSpacingRadius,
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Obx(
-                () => Expanded(
-                  // pin input
-                  child: Pinput(
-                    controller: controller,
-                    showCursor: false,
-                    length: 6,
-                    autofocus: true,
-                    closeKeyboardWhenCompleted: false,
-                    defaultPinTheme: defaultPinTheme,
-                    obscureText: obscure.value,
-                    onSubmitted: processPin,
-                    onCompleted: processPin,
-                    focusedPinTheme: defaultPinTheme.copyWith(
-                      width: 60,
-                      height: 60,
-                    ),
-                    submittedPinTheme: defaultPinTheme.copyWith(
-                      width: 60,
-                      height: 60,
-                    ),
-                    followingPinTheme: defaultPinTheme.copyWith(
-                      width: 60,
-                      height: 60,
+            // subtitle
+            Text(
+              'Masukan Kode PIN',
+              style: Get.textTheme.bodySmall!.copyWith(color: Colors.black),
+            ),
+            24.verticalSpacingRadius,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Obx(
+                  () => Expanded(
+                    // pin input
+                    child: Pinput(
+                      controller: controller,
+                      showCursor: false,
+                      length: 6,
+                      autofocus: true,
+                      closeKeyboardWhenCompleted: false,
+                      defaultPinTheme: defaultPinTheme,
+                      obscureText: obscure.value,
+                      onSubmitted: processPin,
+                      onCompleted: processPin,
+                      focusedPinTheme: defaultPinTheme.copyWith(
+                        width: 60,
+                        height: 60,
+                      ),
+                      submittedPinTheme: defaultPinTheme.copyWith(
+                        width: 60,
+                        height: 60,
+                      ),
+                      followingPinTheme: defaultPinTheme.copyWith(
+                        width: 60,
+                        height: 60,
+                      ),
                     ),
                   ),
                 ),
-              ),
-              10.horizontalSpace,
-              // show pin button
-              Obx(
-                () => InkWell(
-                  radius: 24.r,
-                  child: Icon(
-                    obscure.value ? Icons.visibility : Icons.visibility_off,
-                    color: Theme.of(context).primaryColor,
-                    size: 20.r,
-                  ),
-                  onTap: () {
-                    obscure.value = !obscure.value;
-                  },
-                ),
-              ),
-            ],
-          ),
-
-          /// Pesan error
-          Obx(
-            () => errorText.value != null
-                ? Padding(
-                    padding:
-                        EdgeInsets.only(left: 15.r, right: 15.r, top: 10.r),
-                    child: Text(
-                      errorText.value!,
-                      style: Get.textTheme.bodySmall!
-                          .copyWith(color: Theme.of(context).colorScheme.error),
-                      textAlign: TextAlign.center,
+                10.horizontalSpace,
+                // show pin button
+                Obx(
+                  () => InkWell(
+                    radius: 24.r,
+                    child: Icon(
+                      obscure.value ? Icons.visibility : Icons.visibility_off,
+                      color: Theme.of(context).primaryColor,
+                      size: 20.r,
                     ),
-                  )
-                : Container(),
-          ),
-        ],
+                    onTap: () {
+                      obscure.value = !obscure.value;
+                    },
+                  ),
+                ),
+              ],
+            ),
+
+            /// Pesan error
+            Obx(
+              () => errorText.value != null
+                  ? Padding(
+                      padding:
+                          EdgeInsets.only(left: 15.r, right: 15.r, top: 10.r),
+                      child: Text(
+                        errorText.value!,
+                        style: Get.textTheme.bodySmall!.copyWith(
+                            color: Theme.of(context).colorScheme.error),
+                        textAlign: TextAlign.center,
+                      ),
+                    )
+                  : Container(),
+            ),
+          ],
+        ),
       ),
     );
   }

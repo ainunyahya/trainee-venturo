@@ -2,11 +2,12 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:trainee/configs/themes/main_color.dart';
+import 'package:trainee/constants/cores/assets/image_constant.dart';
 import 'package:trainee/features/bottom_navbar/features/list/features/checkout/views/components/title_option.dart';
 
 import '../../../../views/components/section_header.dart';
 import '../../controllers/checkout_controller.dart';
-import '../components/card_list_sliver.dart';
 import '../components/card_order_buttom_bar.dart';
 import '../components/rounded_custom_app_bar.dart';
 
@@ -23,9 +24,10 @@ class CheckoutView extends StatelessWidget {
 
     return Scaffold(
       appBar: const RoundedAppBar(
-        title: 'Order',
-        icon: Icons.shopping_cart_checkout,
+        title: 'Pesanan',
+        image: ImageConstant.pesanan,
       ),
+      backgroundColor: MainColor.white,
       body: Obx(() => CustomScrollView(
             physics: const ClampingScrollPhysics(),
             slivers: [
@@ -37,13 +39,13 @@ class CheckoutView extends StatelessWidget {
                     color: Theme.of(context).primaryColor,
                   ),
                 ),
-                SliverPadding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 25.w, vertical: 8.h),
-                  sliver: CartListSliver(
-                    carts: CheckoutController.to.foodItems,
-                  ),
-                )
+                // SliverPadding(
+                //   padding:
+                //       EdgeInsets.symmetric(horizontal: 25.w, vertical: 8.h),
+                //   sliver: CartListSliver(
+                //     carts: CheckoutController.to.foodItems,
+                //   ),
+                // )
               ],
               SliverToBoxAdapter(child: 17.verticalSpace),
               if (CheckoutController.to.drinkItems.isNotEmpty) ...[
@@ -53,20 +55,20 @@ class CheckoutView extends StatelessWidget {
                     color: Theme.of(context).primaryColor,
                   ),
                 ),
-                SliverPadding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: 25.w, vertical: 8.h),
-                  sliver: CartListSliver(
-                    carts: CheckoutController.to.drinkItems,
-                  ),
-                )
+                // SliverPadding(
+                //   padding:
+                //       EdgeInsets.symmetric(horizontal: 25.w, vertical: 8.h),
+                //   sliver: CartListSliver(
+                //     carts: CheckoutController.to.drinkItems,
+                //   ),
+                // )
               ],
             ],
           )),
       bottomNavigationBar: Obx(
         () => Container(
           decoration: BoxDecoration(
-            color: Colors.grey[200],
+            color: Colors.grey[100],
             borderRadius: BorderRadius.vertical(
               top: Radius.circular(30.r),
             ),
@@ -75,7 +77,8 @@ class CheckoutView extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Container(
-                padding: EdgeInsets.symmetric(vertical: 25.h, horizontal: 22.w),
+                padding: EdgeInsets.only(
+                    top: 25.h, left: 22.w, right: 22.w, bottom: 10.h),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -83,7 +86,7 @@ class CheckoutView extends StatelessWidget {
                     TileOption(
                       title: 'Total orders',
                       subtitle: '(${CheckoutController.to.cart.length} Menu):',
-                      icon: Icons.payments_outlined,
+                      // icon: Icons.payments_outlined,
                       message:
                           'Rp ${CheckoutController.to.totalPrice.toString()}',
                       titleStyle: Get.textTheme.bodyLarge,
@@ -94,20 +97,33 @@ class CheckoutView extends StatelessWidget {
 
                     // Discount tile
                     TileOption(
-                      icon: Icons.discount_outlined,
+                      image: ImageConstant.diskon,
                       iconSize: 24.r,
-                      title: 'Discount',
+                      title: 'Diskon',
                       message: 'Rp ${CheckoutController.to.discountPrice}',
                       titleStyle: Get.textTheme.bodyLarge,
                       messageStyle: Get.textTheme.labelLarge!
                           .copyWith(color: Theme.of(context).colorScheme.error),
                     ),
+                    Divider(color: Colors.black54, height: 2.h),
+
+                    // Discount tile
+                    TileOption(
+                      image: ImageConstant.voucher,
+                      iconSize: 24.r,
+                      title: 'Voucher',
+                      message: 'Rp ${CheckoutController.to.discountPrice}',
+                      titleStyle: Get.textTheme.bodyLarge,
+                      messageStyle: Get.textTheme.labelLarge!
+                          .copyWith(color: Theme.of(context).colorScheme.error),
+                    ),
+                    Divider(color: Colors.black54, height: 2.h),
 
                     // Payment options tile
                     TileOption(
-                      icon: Icons.payment_outlined,
+                      image: ImageConstant.pembayaran,
                       iconSize: 24.r,
-                      title: 'Payment',
+                      title: 'Pembayaran',
                       message: 'Pay Later',
                       titleStyle: Get.textTheme.bodyLarge,
                       messageStyle: Get.textTheme.bodyLarge,

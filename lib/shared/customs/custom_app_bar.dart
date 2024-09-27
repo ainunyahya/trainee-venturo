@@ -5,10 +5,10 @@ import 'package:trainee/configs/themes/main_color.dart';
 import 'package:trainee/shared/styles/google_text_style.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppBar({super.key, required this.title, this.leadingIcon});
+  const CustomAppBar({super.key, required this.title, this.image});
 
   final String title;
-  final Icon? leadingIcon;
+  final String? image;
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
@@ -51,7 +51,18 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  leadingIcon ?? Container(),
+                  image != null
+                      ? Image.asset(
+                          image!,
+                          width: 24.w,
+                          height: 24.h,
+                        )
+                      : SizedBox(
+                          width: 1.w,
+                        ),
+                  SizedBox(
+                    width: 10.w,
+                  ),
                   Text(
                     title,
                     style: GoogleTextStyle.fw600.copyWith(

@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
+import 'package:trainee/configs/routes/main_route.dart';
 import 'package:trainee/features/bottom_navbar/features/list/controllers/list_controller.dart';
 import 'package:trainee/features/bottom_navbar/features/list/models/menu_model.dart';
 import 'package:trainee/features/bottom_navbar/features/list/views/components/menu_card.dart';
-
 
 class SlidableCardComponent extends StatelessWidget {
   const SlidableCardComponent({
@@ -45,11 +45,12 @@ class SlidableCardComponent extends StatelessWidget {
               menu: item,
               isSelected: ListController.to.selectedItems.contains(item),
               onTap: () {
-                if (ListController.to.selectedItems.contains(item)) {
-                  ListController.to.selectedItems.remove(item);
-                } else {
-                  ListController.to.selectedItems.add(item);
-                }
+                Get.toNamed(MainRoute.detailMenu, arguments: item);
+                // if (ListController.to.selectedItems.contains(item)) {
+                //   ListController.to.selectedItems.remove(item);
+                // } else {
+                //   ListController.to.selectedItems.add(item);
+                // }
               },
             ),
           ),

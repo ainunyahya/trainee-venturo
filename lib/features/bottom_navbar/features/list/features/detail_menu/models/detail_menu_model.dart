@@ -1,4 +1,3 @@
-
 import 'package:trainee/features/bottom_navbar/features/list/models/menu_model.dart';
 
 class DetailMenuAPIModel {
@@ -25,14 +24,14 @@ class DetailMenuAPIModel {
 }
 
 class DetailMenuDataModel {
-  AllMenuAPIModel? menu;
+  MenuModel? menu;
   List<ToppingMenuModel>? topping;
   List<LevelMenuModel>? level;
 
   DetailMenuDataModel({this.menu, this.topping, this.level});
 
   DetailMenuDataModel.fromJson(Map<String, dynamic> json) {
-    menu = json['menu'] != null ? AllMenuAPIModel.fromJson(json['menu']) : null;
+    menu = json['menu'] != null ? MenuModel.fromJson(json['menu']) : null;
     if (json['topping'] != null) {
       topping = <ToppingMenuModel>[];
       json['topping'].forEach((v) {

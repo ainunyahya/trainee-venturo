@@ -13,12 +13,12 @@ class ListController extends GetxController {
   final RxList<MenuModel> menuItems = <MenuModel>[].obs;
   final RxList<MenuModel> selectedItems = <MenuModel>[].obs;
   final RxBool canLoadMore = true.obs;
-  final RxString selectedCategory = 'All'.obs;
+  final RxString selectedCategory = 'Semua Makanan'.obs;
   final RxString keyword = ''.obs;
   final List<String> categories = [
-    'All',
-    'Food',
-    'Drink',
+    'Semua Makanan',
+    'Makanan',
+    'Minuman',
     'Snack',
   ];
   final RefreshController refreshController =
@@ -64,11 +64,11 @@ class ListController extends GetxController {
 
   List<MenuModel> get filteredMenuList {
     return menuItems.where((item) {
-      if (selectedCategory.value.toLowerCase() == 'all') {
+      if (selectedCategory.value.toLowerCase() == 'semua makanan') {
         return true;
-      } else if (selectedCategory.value.toLowerCase() == 'food') {
+      } else if (selectedCategory.value.toLowerCase() == 'makanan') {
         return item.kategori == KategoriMenu.MAKANAN;
-      } else if (selectedCategory.value.toLowerCase() == 'drink') {
+      } else if (selectedCategory.value.toLowerCase() == 'minuman') {
         return item.kategori == KategoriMenu.MINUMAN;
       } else if (selectedCategory.value.toLowerCase() == 'snack') {
         return item.kategori == KategoriMenu.SNACK;

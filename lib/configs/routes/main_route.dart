@@ -9,7 +9,7 @@ abstract class MainRoute {
   // static const String counter = '/counter';
   static const String bottomNavBar = '/bottom-nav-bar';
   static const String list = '/list';
-  static const String pesanan = '/pesanan';
+  // static const String pesanan = '/pesanan';
   static const String profile = '/profile';
   static const String detailPromo = '/detail-promo';
   static const String detailMenu = '/detail-menu';

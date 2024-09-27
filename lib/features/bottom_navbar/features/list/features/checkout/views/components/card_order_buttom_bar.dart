@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:trainee/constants/cores/assets/image_constant.dart';
 
 class CartOrderBottomBar extends StatelessWidget {
   const CartOrderBottomBar({
@@ -38,9 +39,10 @@ class CartOrderBottomBar extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Icon(
-            Icons.shopping_cart_outlined,
-            size: 35.r,
+          Image.asset(
+            ImageConstant.keranjang,
+            width: 35.w,
+            height: 30.h,
           ),
           9.horizontalSpace,
           Expanded(

@@ -1,16 +1,21 @@
 import 'package:get/route_manager.dart';
 import 'package:trainee/configs/routes/main_route.dart';
 import 'package:trainee/features/bottom_navbar/bindings/bottom_navbar_binding.dart';
+import 'package:trainee/features/bottom_navbar/features/list/features/checkout/bindings/checkout_binding.dart';
+import 'package:trainee/features/bottom_navbar/features/list/features/checkout/views/ui/checkout_view.dart';
+import 'package:trainee/features/bottom_navbar/features/list/features/detail_menu/bindings/detail_menu_binding.dart';
 import 'package:trainee/features/bottom_navbar/features/list/features/detail_menu/views/ui/detail_menu_view.dart';
 import 'package:trainee/features/bottom_navbar/features/list/features/detail_promo/bindings/detail_promo_binding.dart';
+import 'package:trainee/features/bottom_navbar/features/order/bindings/order_binding.dart';
+import 'package:trainee/features/bottom_navbar/features/order/views/ui/order_view.dart';
+import 'package:trainee/features/bottom_navbar/features/profile/bindings/profile_binding.dart';
+import 'package:trainee/features/bottom_navbar/features/profile/views/ui/profile_view.dart';
 import 'package:trainee/features/forgot_password/bindings/forgot_password_binding.dart';
 import 'package:trainee/features/forgot_password/bindings/otp_binding.dart';
 import 'package:trainee/features/forgot_password/views/ui/forgot_password_view.dart';
 import 'package:trainee/features/forgot_password/views/ui/otp_view.dart';
 import 'package:trainee/features/bottom_navbar/features/list/bindings/list_binding.dart';
 import 'package:trainee/features/bottom_navbar/features/list/views/ui/list_item_view.dart';
-import 'package:trainee/features/bottom_navbar/features/list/views/ui/pesanan_view.dart';
-import 'package:trainee/features/bottom_navbar/features/list/views/ui/profile_view.dart';
 import 'package:trainee/features/no_connection/views/ui/no_connection_view.dart';
 import 'package:trainee/features/sign_in/bindings/sign_in_binding.dart';
 import 'package:trainee/features/sign_in/views/ui/sign_in_view.dart';
@@ -65,24 +70,26 @@ abstract class MainPage {
       binding: BottomNavbarBinding(),
       bindings: [
         ListBinding(),
+        OrderBinding(),
+        ProfileBinding(),
       ],
       children: [
         GetPage(
-      name: MainRoute.list,
-      page: () => const ListItemView(),
-      binding: ListBinding(),
-    ),
-      ]
-    ),
-    GetPage(
-      name: MainRoute.pesanan,
-      page: () => const PesananView(),
-      // binding: ListBinding(),
-    ),
-    GetPage(
-      name: MainRoute.profile,
-      page: () => const ProfileView(),
-      // binding: ListBinding(),
+          name: MainRoute.list,
+          page: () => const ListItemView(),
+          binding: ListBinding(),
+        ),
+        GetPage(
+          name: MainRoute.order,
+          page: () => const OrderView(),
+          binding: OrderBinding(),
+        ),
+        GetPage(
+          name: MainRoute.profile,
+          page: () => const ProfileView(),
+          binding: ProfileBinding(),
+        ),
+      ],
     ),
     GetPage(
       name: MainRoute.detailPromo,
@@ -91,8 +98,13 @@ abstract class MainPage {
     ),
     GetPage(
       name: MainRoute.detailMenu,
-      page: () => const DetailMenu(),
-      // binding: ListBinding(),
+      page: () => DetailMenu(),
+      binding: DetailMenuBinding(),
+    ),
+    GetPage(
+      name: MainRoute.checkout,
+      page: () => const CheckoutView(),
+      binding: CheckoutBinding(),
     ),
   ];
 }

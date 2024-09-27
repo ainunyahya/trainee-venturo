@@ -12,8 +12,6 @@ import '../components/menu_chip.dart';
 import '../components/promo_card.dart';
 import '../components/section_header.dart';
 
-
-
 class ListItemView extends StatelessWidget {
   const ListItemView({super.key});
 
@@ -26,103 +24,111 @@ class ListItemView extends StatelessWidget {
           onChange: (value) => ListController.to.keyword(value),
         ),
         body: NestedScrollView(
-            physics: const ClampingScrollPhysics(),
-            headerSliverBuilder: (context, innerBoxIsScrolled) {
-              return [
-                SliverToBoxAdapter(child: 22.verticalSpace),
-                // list of promo
-                const SliverToBoxAdapter(
-                  child: SectionHeader(
-                    image: ImageConstant.promo,
-                    title: 'Promo yang Tersedia',
-                  ),
+          physics: const ClampingScrollPhysics(),
+          headerSliverBuilder: (context, innerBoxIsScrolled) {
+            return [
+              SliverToBoxAdapter(child: 22.verticalSpace),
+              // list of promo
+              const SliverToBoxAdapter(
+                child: SectionHeader(
+                  image: ImageConstant.promo,
+                  title: 'Promo yang Tersedia',
                 ),
-                SliverToBoxAdapter(child: 22.verticalSpace),
-                SliverToBoxAdapter(
-                  child: SizedBox(
-                    width: 1.sw,
-                    height: 188.h,
-                    child: Obx(
-                      () => ListView.separated(
-                        scrollDirection: Axis.horizontal,
-                        shrinkWrap: true,
-                        padding: EdgeInsets.symmetric(horizontal: 25.w),
-                        itemBuilder: (context, index) {
-                          return Obx(
-                            () => PromoCard(
-                              isVoucher: ListController
-                                .to.promoItems[index].type == "voucher" ? true : false,
-                              enableShadow: false,
-                              promoName: ListController.to.promoItems[index].nama!,
-                              discountNominal: ListController
-                                .to.promoItems[index].nominal.toString(),
-                              thumbnailUrl:
-                                  "https://javacode.landa.id/img/promo/gambar_62661b52223ff.png",
-                              onTap: () {
-                                Get.toNamed(
-                                  MainRoute.detailPromo,
-                                  arguments: ListController.to.promoItems[index],
-                                  
-                                );
-                              },
-                            ),
-                          );
-                        },
-                        separatorBuilder: (context, index) => 26.horizontalSpace,
-                        itemCount: ListController.to.promoItems.length,
-                      ),
+              ),
+              SliverToBoxAdapter(child: 22.verticalSpace),
+              SliverToBoxAdapter(
+                child: SizedBox(
+                  width: 1.sw,
+                  height: 188.h,
+                  child: Obx(
+                    () => ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      shrinkWrap: true,
+                      padding: EdgeInsets.symmetric(horizontal: 25.w),
+                      itemBuilder: (context, index) {
+                        return Obx(
+                          () => PromoCard(
+                            isVoucher:
+                                ListController.to.promoItems[index].type ==
+                                        "voucher"
+                                    ? true
+                                    : false,
+                            enableShadow: false,
+                            promoName:
+                                ListController.to.promoItems[index].nama!,
+                            discountNominal: ListController
+                                .to.promoItems[index].nominal
+                                .toString(),
+                            thumbnailUrl:
+                                "https://javacode.landa.id/img/promo/gambar_62661b52223ff.png",
+                            onTap: () {
+                              Get.toNamed(
+                                MainRoute.detailPromo,
+                                arguments: ListController.to.promoItems[index],
+                              );
+                            },
+                          ),
+                        );
+                      },
+                      separatorBuilder: (context, index) => 26.horizontalSpace,
+                      itemCount: ListController.to.promoItems.length,
                     ),
                   ),
                 ),
-                SliverToBoxAdapter(child: 22.verticalSpace),
-                // Row of categories
-                SliverToBoxAdapter(
-                  child: SizedBox(
-                    width: 1.sw,
-                    height: 45.h,
-                    child: ListView.separated(
-                      scrollDirection: Axis.horizontal,
-                      itemCount: ListController.to.categories.length,
-                      padding: EdgeInsets.symmetric(horizontal: 25.w),
-                      itemBuilder: (context, index) {
-                        final category = ListController.to.categories[index];
-                        String imageChip;
-                        if (category == ListController.to.categories[0]) {
-                          imageChip = ImageConstant.list;
-                        } else if (category ==
-                            ListController.to.categories[1]) {
-                          imageChip = ImageConstant.makanan;
-                        } else if (category ==
-                            ListController.to.categories[2]) {
-                          imageChip = ImageConstant.makanan;
-                        } else {
-                          imageChip = ImageConstant.snack;
-                        }
-                        return Obx(() => MenuChip(
+              ),
+              SliverToBoxAdapter(child: 22.verticalSpace),
+              // Row of categories
+              SliverToBoxAdapter(
+                child: SizedBox(
+                  width: 1.sw,
+                  height: 45.h,
+                  child: ListView.separated(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: ListController.to.categories.length,
+                    padding: EdgeInsets.symmetric(horizontal: 25.w),
+                    itemBuilder: (context, index) {
+                      final category = ListController.to.categories[index];
+                      String imageChip;
+
+                      if (category == ListController.to.categories[0]) {
+                        imageChip = ImageConstant.list;
+                      } else if (category == ListController.to.categories[1]) {
+                        imageChip = ImageConstant.makanan;
+                      } else if (category == ListController.to.categories[2]) {
+                        imageChip = ImageConstant.makanan;
+                      } else {
+                        imageChip = ImageConstant.snack;
+                      }
+
+                      return Obx(
+                        () => MenuChip(
                           onTap: () {
                             ListController.to.selectedCategory(category);
                           },
                           isSelected:
-                            ListController.to.selectedCategory.value ==
-                              category,
+                              ListController.to.selectedCategory.value ==
+                                  category,
                           text: category,
                           image: imageChip,
-                        ));
-                      },
-                      separatorBuilder: (context, index) => 13.horizontalSpace,
-                    ),
+                        ),
+                      );
+                    },
+                    separatorBuilder: (context, index) => 13.horizontalSpace,
                   ),
                 ),
-                SliverToBoxAdapter(child: 10.verticalSpace),
-              ];
-            },
-            body: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Obx(() {
+              ),
+              SliverToBoxAdapter(child: 10.verticalSpace),
+            ];
+          },
+          body: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Obx(
+                () {
                   final currentCategory =
-                    ListController.to.selectedCategory.value;
+                      ListController.to.selectedCategory.value;
                   var imageSection = ImageConstant.list;
+
                   if (currentCategory == ListController.to.categories[1]) {
                     imageSection = ImageConstant.makanan;
                   } else if (currentCategory ==
@@ -144,30 +150,38 @@ class ListItemView extends StatelessWidget {
                       image: imageSection,
                     ),
                   );
-                }),
-                Obx(
-                  () => Expanded(
-                    child: SmartRefresher(
-                      controller: ListController.to.refreshController,
-                      enablePullDown: true,
-                      onRefresh: ListController.to.onRefresh,
-                      enablePullUp:
-                          ListController.to.canLoadMore.isTrue ? true : false,
-                      onLoading: ListController.to.getAllMenus,
-                      child: ListView.builder(
-                        padding: EdgeInsets.symmetric(horizontal: 25.w),
-                        itemCount: ListController.to.filteredMenuList.length,
-                        itemBuilder: (context, index) {
-                          final item =
-                              ListController.to.filteredMenuList[index];
-                          return SlidableCardComponent(item: item);
-                        },
-                      ),
+                },
+              ),
+              Obx(
+                () => Expanded(
+                  child: SmartRefresher(
+                    controller: ListController.to.refreshController,
+                    enablePullDown: true,
+                    onRefresh: ListController.to.onRefresh,
+                    enablePullUp:
+                        ListController.to.canLoadMore.isTrue ? true : false,
+                    onLoading: ListController.to.getAllMenus,
+                    child: ListView.builder(
+                      padding: EdgeInsets.symmetric(horizontal: 25.w),
+                      itemCount: ListController.to.filteredMenuList.length,
+                      itemBuilder: (context, index) {
+                        final item = ListController.to.filteredMenuList[index];
+                        return SlidableCardComponent(item: item);
+                      },
                     ),
                   ),
                 ),
-              ],
-            )),
+              ),
+            ],
+          ),
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Get.toNamed(MainRoute.checkout);
+          },
+          backgroundColor: Colors.blue,
+          child: const Icon(Icons.shopping_cart),
+        ),
       ),
     );
   }

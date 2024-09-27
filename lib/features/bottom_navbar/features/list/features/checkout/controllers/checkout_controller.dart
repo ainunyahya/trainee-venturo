@@ -3,12 +3,12 @@ import 'package:get/get.dart';
 import 'package:local_auth/local_auth.dart';
 import 'package:sentry_flutter/sentry_flutter.dart';
 import 'package:trainee/configs/routes/main_route.dart';
+import 'package:trainee/configs/themes/main_color.dart';
 import 'package:trainee/features/bottom_navbar/features/list/features/checkout/repositories/cart_repository.dart';
 
 import '../views/components/fingerprint_dialog.dart';
 import '../views/components/order_success_dialog.dart';
 import '../views/components/pin_dialog.dart';
-
 
 class CheckoutController extends GetxController {
   static CheckoutController get to => Get.find<CheckoutController>();
@@ -122,10 +122,10 @@ class CheckoutController extends GetxController {
     const userPin = '123456';
 
     final bool? authenticated = await Get.defaultDialog(
-      title: '',
-      titleStyle: const TextStyle(fontSize: 0),
-      content: const PinDialog(pin: userPin),
-    );
+        title: '',
+        titleStyle: const TextStyle(fontSize: 0),
+        content: const PinDialog(pin: userPin),
+        backgroundColor: MainColor.white);
 
     if (authenticated == true) {
       // if succeed, order cart
@@ -139,10 +139,10 @@ class CheckoutController extends GetxController {
   Future<void> showOrderSuccessDialog() async {
     Get.until(ModalRoute.withName(MainRoute.checkout));
     await Get.defaultDialog(
-      title: '',
-      titleStyle: const TextStyle(fontSize: 0),
-      content: const OrderSuccessDialog(),
-    );
+        title: '',
+        titleStyle: const TextStyle(fontSize: 0),
+        content: const OrderSuccessDialog(),
+        backgroundColor: MainColor.white);
 
     Get.back();
   }

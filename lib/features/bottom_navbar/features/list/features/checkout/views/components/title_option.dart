@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class TileOption extends StatelessWidget {
-  final IconData? icon;
+  final String? image;
   final String title;
   final String? subtitle;
   final String message;
@@ -19,7 +19,7 @@ class TileOption extends StatelessWidget {
 
   const TileOption({
     super.key,
-    this.icon,
+    this.image,
     required this.title,
     this.subtitle,
     required this.message,
@@ -44,19 +44,20 @@ class TileOption extends StatelessWidget {
           child: Row(
             children: [
               // Icon
-              if (icon != null)
+              if (image != null)
                 Container(
                   constraints: BoxConstraints(minWidth: (iconSize ?? 20.r) * 2),
-                  child: Icon(
-                    icon,
-                    size: iconSize ?? 20.r,
+                  child: Image.asset(
+                    image!,
+                    height: 20.h,
+                    width: 20.w,
                   ),
                 ),
 
               // title text
               Text(
                 title,
-                style: titleStyle ?? Get.textTheme.titleSmall,
+                style: titleStyle ?? Get.textTheme.titleMedium,
               ),
 
               // subtitle text

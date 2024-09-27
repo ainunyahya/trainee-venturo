@@ -19,6 +19,9 @@ class DetailMenuController extends GetxController {
   final RxInt itemQuantity = 1.obs;
   final Rx<TextEditingController> noteController = TextEditingController().obs;
 
+  // List to store cart items
+  var cartItems = <MenuModel>[].obs;
+
   @override
   Future<void> onInit() async {
     super.onInit();
@@ -34,6 +37,12 @@ class DetailMenuController extends GetxController {
   void onClose() {
     // Dispose of any resources or subscriptions here
     super.onClose();
+  }
+
+  // Method to add item to cart
+  void addToCart(MenuModel menu) {
+    cartItems.add(menu);
+    Get.snackbar('Berhasil', '${menu.nama} telah ditambahkan ke pesanan');
   }
 
   // ======== DETAIL MENU Section ===========

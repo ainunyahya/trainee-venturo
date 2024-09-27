@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:trainee/configs/themes/main_color.dart';
+import 'package:trainee/constants/cores/assets/image_constant.dart';
 import 'package:trainee/features/bottom_navbar/features/list/features/detail_promo/controllers/detail_promo_controller.dart';
 import 'package:trainee/features/bottom_navbar/features/list/views/components/promo_card.dart';
+import 'package:trainee/shared/customs/custom_app_bar.dart';
 import 'package:trainee/shared/styles/google_text_style.dart';
 import 'package:html/parser.dart';
 
-import '../components/header_section.dart';
-
 class PromoDetailView extends StatelessWidget {
-
   PromoDetailView({
     super.key,
   });
@@ -17,11 +16,13 @@ class PromoDetailView extends StatelessWidget {
   final DetailPromoController controller = DetailPromoController.to;
   @override
   Widget build(BuildContext context) {
-
-  return SafeArea(
+    return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.grey[100],
-        appBar: const HeaderSection(),
+        appBar: const CustomAppBar(
+          title: 'Promo',
+          image: ImageConstant.promo,
+        ),
         body: Column(
           children: [
             Padding(
@@ -64,8 +65,9 @@ class PromoDetailView extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 10),
-                    const Divider(
+                    Divider(
                       thickness: 1,
+                      color: Colors.grey[400],
                     ),
                     const SizedBox(height: 10),
                     Row(
@@ -76,7 +78,7 @@ class PromoDetailView extends StatelessWidget {
                         ),
                         const SizedBox(width: 10),
                         Text(
-                          "Term & Condition",
+                          "Syarat dan Ketentuan",
                           style: GoogleTextStyle.fw600.copyWith(
                             fontSize: 16,
                             color: MainColor.black,

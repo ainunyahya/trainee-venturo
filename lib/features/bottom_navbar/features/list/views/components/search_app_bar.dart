@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:trainee/constants/cores/assets/image_constant.dart';
 
 class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
   const SearchAppBar({
@@ -9,10 +10,8 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
     this.onChange,
   });
 
-
   final TextEditingController? searchController;
   final ValueChanged<String>? onChange;
-
 
   @override
   Widget build(BuildContext context) {
@@ -57,14 +56,15 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
             ),
           ),
           isDense: true,
-          prefixIcon: Icon(
-            Icons.search,
-            size: 26.h,
+          prefixIcon: Image.asset(
+            ImageConstant.pencarian,
+            height: 14.h,
+            width: 14.w,
           ),
           prefixIconColor: Theme.of(context).primaryColor,
-          hintText: 'Search'.tr,
+          hintText: 'Pencarian'.tr,
           hintStyle: Get.textTheme.labelSmall?.copyWith(
-            color: Colors.black87,
+            color: Colors.grey[500],
             fontSize: 14.sp,
             letterSpacing: 0,
           ),
@@ -72,7 +72,6 @@ class SearchAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
     );
   }
-
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
